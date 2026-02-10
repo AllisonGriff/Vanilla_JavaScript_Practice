@@ -1,0 +1,16 @@
+.red-panda {
+    border: 1px solid black;
+}
+.red-panda-image img {
+    width: 100%;
+    display: block;
+}
+.red-panda-facts {
+    padding: 2rem;
+}
+th, td {
+    padding: 0.5em 1.0em;
+}
+h2 {
+    margin-bottom: 0.5em;
+}

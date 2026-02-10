@@ -1,10 +1,10 @@
 // Objects in JS feel like Dict in python
 
-let examplePerson = {
-    name : "John",
-    age : 30, 
-    email : "John25@gmail.com",
-}
+// let examplePerson = {
+//     name : "John",
+//     age : 30, 
+//     email : "John25@gmail.com",
+// }
 
 // examplePerson.age  <--- dot notation
                         //the same thing... key value look up
@@ -22,4 +22,8 @@ console.log (e)}
 
 -- Everything is unknown until it is not unknown
 */
+
+
+
+// START DAY 7
 
