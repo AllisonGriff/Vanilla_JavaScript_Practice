@@ -27,3 +27,46 @@ console.log (e)}
 
 // START DAY 7
 
+let pandaData = {
+      commonName: "red panda",
+  scientificName: "Ailurus fulgens",
+  scientificClass: "mammal",
+  averageSize: ["20–26 inches (head and body), 12–20 inches (tail), 12–20 lbs"],
+  diet: ["bamboo", "insects", "acorns", "eggs", "fruit"],
+  habitat: ["Nepal", "Central China", "Myanmar"],
+  endangeredSpecies: true,
+  funFacts: [
+    "Red pandas have six toes on their front paws",
+    "Their paws are covered with fur",
+    "They are good at climbing trees"
+  ]
+};
+
+
+
+// Main Logic----- Goal is to have this form a table on the page
+
+let h2 = document
+.querySelector("h2")
+.insertAdjacentHTML(
+    "afterend",
+    `<table class = "table table-striped" > <tbody> </tbody> </table>`);
+
+    // what does afterend mean?
+
+function createRow(key, value){
+    return `
+    <tr>
+        <td>${key} </td>
+        <td>${value} </td>
+    </tr>`
+}
+
+
+let tableData ="";
+for (const key in pandaData){
+    tableData += createRow(key, pandaData[key]);
+}
+
+// insert rows and colums into table
+document.querySelector("tbody").insertAdjacentHTML("afterbegin",tableData)
