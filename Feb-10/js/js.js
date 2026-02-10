@@ -52,14 +52,40 @@ let h2 = document
     "afterend",
     `<table class = "table table-striped" > <tbody> </tbody> </table>`);
 
-    // what does afterend mean?
+    // what does afterend mean\\\
+
+
+    function createList(sequence){
+        let html = "<ul>";
+        for(let item of sequence){
+            html += `<li> ${item}</li>`
+        }
+        html += '</ul>'
+        return html
+    }
 
 function createRow(key, value){
-    return `
-    <tr>
-        <td>${key} </td>
-        <td>${value} </td>
-    </tr>`
+    // how do we know what value is?
+    if (Array.isArray(value)){
+
+        let data = createList(value);
+
+        return `
+        <tr>
+            <td>${key}</td>
+            <td>${data}</td>
+        </tr>`
+        }
+
+    else{
+         return `
+        <tr>
+            <td>${key} </td>
+            <td>${value} </td>
+        </tr>`
+
+    }
+       
 }
 
 
