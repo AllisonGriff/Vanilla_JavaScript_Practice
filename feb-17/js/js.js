@@ -63,16 +63,20 @@ document.querySelector('#function').addEventListener(
 
 
 // Greet the 
-let UserName = document.querySelector('#username')
+let UserName = document.querySelector('#username');
 
 
 function clearInputDisplayName(event){
     let name= UserName.value;
+
+    UserName.value =' '
+
+    
 
     document.querySelector('#greetingElement').textContent = `Hello, ${name}`
     console.log(name)
 
 }
 
-document.querySelector('#go').addEventListener('click', clearInputDisplayNames)
+document.querySelector('#go').addEventListener('click', clearInputDisplayName)
 // replace ____ with Name
