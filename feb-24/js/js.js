@@ -74,3 +74,60 @@ const zodiac = [
 ];
 
 
+let details = document.querySelector('#details')
+
+let animalSection = document.querySelector('.animals')
+
+// How might we loop through the animal section creating an image with some 
+// data for each of the animals
+
+// <img data-name="rat" src="images/rat.png" alt="rat" />
+
+for (let i = 0; i < zodiac.length; i++){
+    let name = zodiac[i].animal.toLowerCase();
+    let animal = zodiac[i].animal;
+    console.log(name);
+
+    let imgString = `<img data-animal = "${animal}" data-name= "${name}" src="images/${name}.png" alt="${name}" />`;
+    animalSection.insertAdjacentHTML('beforeend', imgString);
+}
+
+
+function updateDetailsBlock(animalName){
+    // searches for animal's name in array
+
+    // animal name = 'Dog';
+
+    let animalData = zodiac.find((animal) => (animal.animal == animalName));
+
+    let newDetails = `
+    <h3> ${animalData.animal} </h3>
+    <p> ${animalData.animal} </p>
+    <p> ${animalData.animal} </p>`
+
+    details.innerHTML = newDetails;
+
+    console.log(animalData);
+}
+
+
+
+// how might we add an event listener to every single image in the document
+
+let images = document.querySelectorAll("img").forEach(
+    (img) => {
+        console.log(img);
+
+        img.addEventListener(
+            'click', (event) => {
+                updateDetailsBlock(event.target.dataset.animal);
+
+
+            }
+        )
+
+
+    }
+
+);
+
