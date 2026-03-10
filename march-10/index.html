@@ -1,40 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-/>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-    href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet"
-/>
-     <link rel="stylesheet" href="./styles.css">
+        href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
-    
-<div class="container">
-    <header>
-        <h1>Wordle</h1>
-        <div class="notice" id="notice"></div>
-    </header>
-    <div class="tiles" id="tiles"></div>
-    <div class="keys" id="keys"></div>
-    <div class="modal-outer">
-        <div class="modal-inner"></div>
-    </div>
-</div>
 
-<!-- Type module will allow us to import the two word lists in individual JS files -->
-<script src="wordle.js" type="module"></script>
+    <div class="container">
+        <header>
+            <h1>Wordle</h1>
+            <div class="notice" id="notice"></div>
+        </header>
+        <div class="tiles" id="tiles">
+            <div id='row-1'>
+                <div class="tile color-correct">S</div>
+                <div class="tile color-present">L</div>
+                <div class="tile color-absent">A</div>
+                <div class="tile color-absent">T</div>
+                <div class="tile color-correct">E</div>
+            </div>
+
+            <div class="tiles" id="tiles">
+                <div id='row-2'>
+                    <div class="tile active"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                    <div class="tile"></div>
+                </div>
+
+            </div>
+            <div class="keys" id="keys">
+                <div id='kbd-row-1'>
+                    <div class="key"> Q</div>
+                    <div class="key"> W</div>
+                    <div class="key"> E</div>
+                    <div class="key"> R</div>
+                    <div class="key"> T</div>
+                </div>
+                <div id='kbd-row-2'>
+                    <div class="key"> S</div>
+                    <div class="key"> D</div>
+                    <div class="key"> F</div>
+                    <div class="key"> G</div>
+                    <div class="key"> H</div>
+                </div>
+                <div id='kbd-row-3'>
+                    <div class="key"> Q</div>
+                    <div class="key"> Q</div>
+                    <div class="key"> Q</div>
+                    <div class="key"> Q</div>
+                    <div class="key"> Q</div>
+                </div>
+            </div>
+            <div class="modal-outer">
+                <div class="modal-inner"></div>
+            </div>
+        </div>
+
+        <!-- Type module will allow us to import the two word lists in individual JS files -->
+        <script src="wordle.js" type="module"></script>
 
 
 
-    <script src="./js/js.js"></script>
+        <script src="./js/js.js"></script>
 </body>
+
 </html>
