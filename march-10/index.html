@@ -17,60 +17,20 @@
 
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Wordle</h1>
-            <div class="notice" id="notice"></div>
-        </header>
-        <div class="tiles" id="tiles">
-            <div id='row-1'>
-                <div class="tile color-correct">S</div>
-                <div class="tile color-present">L</div>
-                <div class="tile color-absent">A</div>
-                <div class="tile color-absent">T</div>
-                <div class="tile color-correct">E</div>
-            </div>
+   <div class="container">
+    <header>
+        <h1>Wordle</h1>
+        <div class="notice" id="notice"></div>
+    </header>
+    <div class="tiles" id="tiles"></div>
+    <div class="keys" id="keys"></div>
+    <div class="modal-outer">
+        <div class="modal-inner"></div>
+    </div>
+</div>
 
-            <div class="tiles" id="tiles">
-                <div id='row-2'>
-                    <div class="tile active"></div>
-                    <div class="tile"></div>
-                    <div class="tile"></div>
-                    <div class="tile"></div>
-                    <div class="tile"></div>
-                </div>
 
-            </div>
-            <div class="keys" id="keys">
-                <div id='kbd-row-1'>
-                    <div class="key"> Q</div>
-                    <div class="key"> W</div>
-                    <div class="key"> E</div>
-                    <div class="key"> R</div>
-                    <div class="key"> T</div>
-                </div>
-                <div id='kbd-row-2'>
-                    <div class="key"> S</div>
-                    <div class="key"> D</div>
-                    <div class="key"> F</div>
-                    <div class="key"> G</div>
-                    <div class="key"> H</div>
-                </div>
-                <div id='kbd-row-3'>
-                    <div class="key"> Q</div>
-                    <div class="key"> Q</div>
-                    <div class="key"> Q</div>
-                    <div class="key"> Q</div>
-                    <div class="key"> Q</div>
-                </div>
-            </div>
-            <div class="modal-outer">
-                <div class="modal-inner"></div>
-            </div>
-        </div>
 
-        <!-- Type module will allow us to import the two word lists in individual JS files -->
-        <script src="wordle.js" type="module"></script>
 
 
 
