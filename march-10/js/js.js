@@ -8,7 +8,7 @@ const state = {
     currentGuess: [],
     currentTile: 1,
     currentTileRow: 1
-   
+
 };
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -20,9 +20,76 @@ const state = {
  */
 function chooseWord() {
     let arrlength = wordleWords.length;
-    let randomNum = Math.floor(Math.random() *arrlength);
+    let randomNum = Math.floor(Math.random() * arrlength);
 
     state.wordleWord = wordleWords[randomNum].split("");
+
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+//  MAKE A GUESS: ADD A LETTER
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/**
+ * Creates an array of 5 letters = a guessed word
+ * @param {string} letter
+ */
+function buildGuess(letter) {
+
+    console.log(letter)
+
+    if (state.currentGuess.length >= 5) {
+        // do nothing
+        console.log('too long');
+    }
+    else {
+        addTile(letter)
+    }
+    console.log(state.currentGuess);
+
+    // as long as currentGuess isn't 5-letters long, add a letter to a tile
+}
+
+/**
+ * Updates a tile to add a letter to the interface when an interface key is selected
+ * @param {string} letter
+ */
+function addTile(letter) {
+    // select the current row and tile (keep track in global state)
+    // add a CAPTIAL letter as text content into the tile (interface)
+    // add the .active class to the tile (interface)
+    // update which tile we are on
+
+
+    let currentTile = document.querySelector(`#row-${state.currentTileRow}-${state.currentTile}`);
+    currentTile.classList.add('active');
+    currentTile.textContent = letter.toUpperCase();
+
+    state.currentTile += 1;
+
+    // currentRow[state.currentTile].textContent = letter.toUpperCase('');
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+//  MAKE A GUESS: REMOVE A LETTER
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/**
+ * Handles when the backspace key is clicked
+ * - removes a tile and a letter in guessed word
+ */
+function deleteTile() {
+    // if there are any letters left in the guess (global)...
+    // delete a letter from the guess
+    // delete the tile for that letter
+
+    state.currentTile -= 1;
+
+    let currentTile = document.querySelector(`row-${state.currentTileRow}-${state.currentTile}`);
+    currentTile.classList.remove('active');
+    currentTile.text="";
+
+
+    // TODO: Handle edgecases
 
 }
 
@@ -30,7 +97,7 @@ function chooseWord() {
 
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//  CREATE INTERFACE
+//  CREATE INTERSACE
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 /**
  * Creates six rows of tiles each for the interface
@@ -40,11 +107,11 @@ function createTiles() {
 
     for (let i = 6; i >= 1; i--) {
         let row = `<div id="row-${i}">
-                <div class="tile" data-tile="1"></div>
-                <div class="tile" data-tile="2"></div>
-                <div class="tile" data-tile="3"></div>
-                <div class="tile" data-tile="4"></div>
-                <div class="tile" data-tile="5"></div>
+                <div class="tile" id="row-${i}-1"></div>
+                <div class="tile" id="row-${i}-2"></div>
+                <div class="tile" id="row-${i}-3"></div>
+                <div class="tile" id="row-${i}-4"></div>
+                <div class="tile" id="row-${i}-5"></div>
         </div>`;
 
         tilesDiv.insertAdjacentHTML(
@@ -53,6 +120,9 @@ function createTiles() {
         );
     }
 }
+
+
+
 
 /**
  * Creates three rows of keyboard keys as interface elements
@@ -118,6 +188,7 @@ window.addEventListener('keydown', (event) => {
         !event.key.includes('Arrow')
     ) {
         console.log('ALPHABET KEY:', event.key);
+        buildGuess(event.key)
     } else {
         console.log('not a valid key');
     }
@@ -128,4 +199,5 @@ window.addEventListener('keydown', (event) => {
 (() => {
     createTiles();
     createKeys();
+    chooseWord();
 })();
