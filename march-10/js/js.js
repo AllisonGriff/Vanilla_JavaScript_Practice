@@ -11,8 +11,31 @@ const state = {
    
 };
 
- console.log (wordleWords);
- 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+//  FUNCTIONALITY
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/**
+ * Randomly chooses a word from the official wordle choices list
+ * @returns {array} wordleWord (sets global)
+ */
+function chooseWord() {
+    let arrlength = wordleWords.length;
+    let randomNum = Math.floor(Math.random() *arrlength);
+
+    state.wordleWord = wordleWords[randomNum].split("");
+
+
+    return wordleWords[randomNum];
+
+
+}
+
+
+console.log(chooseWord());
+console.log(state)
+console.log(chooseWord());
+console.log(state)
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 //  CREATE INTERFACE
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
