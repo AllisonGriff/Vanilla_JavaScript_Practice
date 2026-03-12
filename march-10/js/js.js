@@ -24,17 +24,10 @@ function chooseWord() {
 
     state.wordleWord = wordleWords[randomNum].split("");
 
-
-    return wordleWords[randomNum];
-
-
 }
 
 
-console.log(chooseWord());
-console.log(state)
-console.log(chooseWord());
-console.log(state)
+
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 //  CREATE INTERFACE
