@@ -64,6 +64,8 @@ function checkGuess() {
             console.log("IS Valid");
 
             // TODO: This is where we update the row and modify the interface flipping over the tiles.
+            // TODO: evaluate guess
+            // evaluateGuess()
         } else {
             console.log("IS NOT valid");
             // Display a message?
