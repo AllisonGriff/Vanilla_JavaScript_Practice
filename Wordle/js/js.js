@@ -1,15 +1,17 @@
 'use strict';
+
+
 import { wordleWords } from "./wordle-list.js";
 import { fullList } from "./full-list.js";
 
-// globals - state of the game
+
 const state = {
     wordleWord: [],
     currentGuess: [],
     currentTile: 1,
     currentTileRow: 1
-
 };
+
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 //  FUNCTIONALITY
@@ -19,12 +21,11 @@ const state = {
  * @returns {array} wordleWord (sets global)
  */
 function chooseWord() {
-    let arrlength = wordleWords.length;
-    let randomNum = Math.floor(Math.random() * arrlength);
-
-    state.wordleWord = wordleWords[randomNum].split("");
-
+    let arrLength = wordleWords.length;
+    let randomNumber = Math.floor(Math.random() * arrLength);
+    state.wordleWord = wordleWords[randomNumber].split("");
 }
+
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 //  MAKE A GUESS: ADD A LETTER
@@ -34,19 +35,15 @@ function chooseWord() {
  * @param {string} letter
  */
 function buildGuess(letter) {
-
-    console.log(letter)
+    // as long as currentGuess isn't 5-letters long, add a letter to a tile
 
     if (state.currentGuess.length >= 5) {
         // do nothing
-        console.log('too long');
-    }
-    else {
-        addTile(letter)
+        console.log("too long!");
+    } else {
+        addTile(letter);
     }
     console.log(state.currentGuess);
-
-    // as long as currentGuess isn't 5-letters long, add a letter to a tile
 }
 
 /**
@@ -59,16 +56,13 @@ function addTile(letter) {
     // add the .active class to the tile (interface)
     // update which tile we are on
 
-
     let currentTile = document.querySelector(`#row-${state.currentTileRow}-${state.currentTile}`);
-    currentTile.classList.add('active');
+    currentTile.classList.add("active");
     currentTile.textContent = letter.toUpperCase();
 
+    // Increment the row that we are on
     state.currentTile += 1;
-
-    // currentRow[state.currentTile].textContent = letter.toUpperCase('');
 }
-
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 //  MAKE A GUESS: REMOVE A LETTER
@@ -82,22 +76,21 @@ function deleteTile() {
     // delete a letter from the guess
     // delete the tile for that letter
 
+    // TODO(hayesall): We need to handle our boundary conditions!
+    //          > <, etc.
+
     state.currentTile -= 1;
 
-    let currentTile = document.querySelector(`row-${state.currentTileRow}-${state.currentTile}`);
-    currentTile.classList.remove('active');
-    currentTile.text="";
+    let currentTile = document.querySelector(`#row-${state.currentTileRow}-${state.currentTile}`);
+    currentTile.classList.remove("active");
+    currentTile.textContent = "";
 
-
-    // TODO: Handle edgecases
-
+    // TODO: Handle your edge cases when this gets too low
 }
 
 
-
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-//  CREATE INTERSACE
+//  CREATE INTERFACE
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 /**
  * Creates six rows of tiles each for the interface
@@ -120,9 +113,6 @@ function createTiles() {
         );
     }
 }
-
-
-
 
 /**
  * Creates three rows of keyboard keys as interface elements
@@ -177,6 +167,7 @@ window.addEventListener('keydown', (event) => {
         console.log('ENTER KEY:', event.key);
     } else if (event.key === 'Backspace') {
         console.log('BACKSPACE KEY:', event.key);
+        deleteTile();
     } else if (
         regex.test(event.key) &&
         event.key != 'Shift' &&
@@ -188,7 +179,7 @@ window.addEventListener('keydown', (event) => {
         !event.key.includes('Arrow')
     ) {
         console.log('ALPHABET KEY:', event.key);
-        buildGuess(event.key)
+        buildGuess(event.key.toLowerCase());
     } else {
         console.log('not a valid key');
     }
