@@ -58,7 +58,18 @@ function checkGuess() {
     if (state.currentGuess.length < 5) {
         // Is the guess 5 letters?
         // If not, we will have a notice appear with the error "not enough letters"
+
+
+        setTimeout(() => {
+            document.querySelector('#notice').classList.remove('open')
+        }, 1500);
         console.log("Not enough letters");
+
+
+        document.querySelector(`#row-${state.currentTileRow}`).classList.add('shake');
+        setTimeout(() => {
+            document.querySelector(`#row-${state.currentTileRow}`).classList.remove('open')
+        }, 820);
     } else {
         if (isValid(state.currentGuess)) {
             console.log("IS Valid");
@@ -68,16 +79,23 @@ function checkGuess() {
             // evaluateGuess()
         } else {
             console.log("IS NOT valid");
+            // shake the row
+            document.querySelector(`#row-${state.currentTileRow}`).classList.add('shake');
+            setTimeout(() => {
+                document.querySelector(`#row-${state.currentTileRow}`).classList.remove('open')
+            }, 820);
+
+
             // Display a message?
             let notice = document.querySelector('#notice');
             notice.classList.add('open');
             notice.textContent = 'Not Valid';
 
-            setTimeout(() =>{
+            setTimeout(() => {
                 document.querySelector('#notice').classList.remove('open')
             }, 1500);
+        }
     }
-}
 }
 /**
  * Determines if the current guess is a word recognized as a guess by Wordle
