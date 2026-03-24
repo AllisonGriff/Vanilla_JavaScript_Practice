@@ -46,6 +46,46 @@ function buildGuess(letter) {
     console.log(state.currentGuess);
 }
 
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+//  MAKE A GUESS: CHECK THE GUESS
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/**
+ * Checks if a guessed word is valid, and if so sends it to be evaluated
+ * Note: evaluateWord(array) takes an array based off the guessed word
+ */
+function checkGuess() {
+    // What if the user hits Enter before typing in 5 letter?
+    if (state.currentGuess.length < 5) {
+        // Is the guess 5 letters?
+        // If not, we will have a notice appear with the error "not enough letters"
+        console.log("Not enough letters");
+    } else {
+        if (isValid(state.currentGuess)) {
+            console.log("IS Valid");
+
+            // TODO: This is where we update the row and modify the interface flipping over the tiles.
+        } else {
+            console.log("IS NOT valid");
+            // Display a message?
+            let notice = document.querySelector('#notice');
+            notice.classList.add('open');
+            notice.textContent = 'Not Valid';
+
+            setTimeout(() =>{
+                document.querySelector('#notice').classList.remove('open')
+            }, 1500);
+    }
+}
+}
+/**
+ * Determines if the current guess is a word recognized as a guess by Wordle
+ * @param {array} currentWord
+ * @returns {boolean}
+ */
+function isValid(currentWord) {
+    return fullList.find((word) => word == currentWord.join(''));
+}
+
 /**
  * Updates a tile to add a letter to the interface when an interface key is selected
  * @param {string} letter
@@ -56,9 +96,16 @@ function addTile(letter) {
     // add the .active class to the tile (interface)
     // update which tile we are on
 
+    // "Guard" approach
+    if (state.currentTile > 5) {
+        return;
+    }
+
     let currentTile = document.querySelector(`#row-${state.currentTileRow}-${state.currentTile}`);
     currentTile.classList.add("active");
     currentTile.textContent = letter.toUpperCase();
+
+    state.currentGuess.push(letter);
 
     // Increment the row that we are on
     state.currentTile += 1;
@@ -76,14 +123,17 @@ function deleteTile() {
     // delete a letter from the guess
     // delete the tile for that letter
 
-    // TODO(hayesall): We need to handle our boundary conditions!
-    //          > <, etc.
+    if (state.currentTile == 1) {
+        return;
+    }
 
     state.currentTile -= 1;
 
     let currentTile = document.querySelector(`#row-${state.currentTileRow}-${state.currentTile}`);
     currentTile.classList.remove("active");
     currentTile.textContent = "";
+
+    state.currentGuess.pop();
 
     // TODO: Handle your edge cases when this gets too low
 }
@@ -165,6 +215,7 @@ window.addEventListener('keydown', (event) => {
         console.log('ESCAPE KEY:', event.key);
     } else if (event.key === 'Enter') {
         console.log('ENTER KEY:', event.key);
+        checkGuess();
     } else if (event.key === 'Backspace') {
         console.log('BACKSPACE KEY:', event.key);
         deleteTile();
