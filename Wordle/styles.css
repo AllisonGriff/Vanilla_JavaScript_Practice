@@ -193,14 +193,14 @@ h1 {
 }
 .animation-bounce {
     animation-name: bounce;
-    animation-duration: 0.4s;
+    animation-duration: 0.2s;
 }
 @keyframes bounce {
     0% {
         transform: translateY(0);
     }
     35% {
-        transform: translateY(-30px);
+        transform: translateY(-8px);
     }
     100% {
         transform: translateY(0);

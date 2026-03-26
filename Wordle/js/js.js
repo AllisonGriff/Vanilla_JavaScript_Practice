@@ -58,25 +58,21 @@ function checkGuess() {
     if (state.currentGuess.length < 5) {
         // Is the guess 5 letters?
         // If not, we will have a notice appear with the error "not enough letters"
-
+        let notice = document.querySelector("#notice");
+        notice.classList.add("open");
+        notice.textContent = "Not enough letters";
 
         setTimeout(() => {
-            document.querySelector('#notice').classList.remove('open')
+            document.querySelector("#notice").classList.remove("open")
         }, 1500);
-        console.log("Not enough letters");
 
-
-        document.querySelector(`#row-${state.currentTileRow}`).classList.add('shake');
-        setTimeout(() => {
-            document.querySelector(`#row-${state.currentTileRow}`).classList.remove('open')
-        }, 820);
     } else {
         if (isValid(state.currentGuess)) {
             console.log("IS Valid");
 
             // TODO: This is where we update the row and modify the interface flipping over the tiles.
-            // TODO: evaluate guess
-            // evaluateGuess()
+            // evaluateGuess();
+
         } else {
             console.log("IS NOT valid");
             // shake the row
@@ -85,18 +81,18 @@ function checkGuess() {
                 document.querySelector(`#row-${state.currentTileRow}`).classList.remove('open')
             }, 820);
 
-
             // Display a message?
-            let notice = document.querySelector('#notice');
-            notice.classList.add('open');
-            notice.textContent = 'Not Valid';
+            let notice = document.querySelector("#notice");
+            notice.classList.add("open");
+            notice.textContent = "Not a valid word";
 
             setTimeout(() => {
-                document.querySelector('#notice').classList.remove('open')
+                document.querySelector("#notice").classList.remove("open")
             }, 1500);
         }
     }
 }
+
 /**
  * Determines if the current guess is a word recognized as a guess by Wordle
  * @param {array} currentWord
@@ -120,9 +116,15 @@ function addTile(letter) {
     if (state.currentTile > 5) {
         return;
     }
+  
 
     let currentTile = document.querySelector(`#row-${state.currentTileRow}-${state.currentTile}`);
     currentTile.classList.add("active");
+    currentTile.classList.add('animation-bounce');
+
+    setTimeout(() =>{
+        currentTile.classList.remove('animation-bounce');
+    }, 100)
     currentTile.textContent = letter.toUpperCase();
 
     state.currentGuess.push(letter);
