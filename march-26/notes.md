@@ -1,35 +1,8 @@
-<!-- what do you thinkk of when you think of a fast programming language?
- i think of c++ and rust, but there are many other fast programming languages out there. AI ANSWERS
- what makes a programming language fast? is it the way it compiles code, the way it manages memory, or something else?
- there are many factors that can contribute to a programming language being fast. Some of these factors include:
- - The way the language compiles code: Some languages, like C++ and Rust, compile code to machine code, which can be faster than interpreted languages like Python or JavaScript.
- - Memory management: Some languages, like C++ and Rust, give developers more control over memory management, which can lead to faster performance. In contrast, languages like Python and JavaScript use garbage collection, which can introduce overhead.
- - Optimization: Some languages have built-in optimizations that can improve performance. For example, C++ has features like inline functions and template metaprogramming that can help optimize code.
- - Concurrency: Some languages have better support for concurrent programming, which can improve performance in certain scenarios. For example, Go has built-in support for goroutines, which can make it easier to write concurrent code.
- Ultimately, the speed of a programming language depends on many factors, including the specific use case and how well the code is written
- what is an abstraction?
- it is a way to simplify code to make it easier to understand and use. 
- it is a way to hide complexity and provide a simpler interface for users
- what is a zero cost abstraction?
- it is an abstraction that does not introduce any overhead or performance penalty.
- it is an abstraction that is optimized away by the compiler, so it does not affect the performance of the code.
-/ Zero-cost abstraction: a wrapper class
- class Temperature {
- private:
-     float celsius;
- public:
-     Temperature(float c) : celsius(c) {}  
-     float getCelsius() const { return celsius; }
-     float getFahrenheit() const { return celsius * 9/5 + 32; }
- }
- Usage
- Temperature temp(25);
-loat f = temp.getFahrenheit();
+# Day 16
 
- object oriented programming vs functional programming  -->
+Let's think about two types of abstractions: one from "functional programming", and another from "theoretical computer science" (regex).
 
-
-```
+```javascript
 const nums = [1, 2, 3, 4, 5, 6];
 const words = ['the', 'quick', 'brown', 'fox'];
 const colors = [
@@ -56,8 +29,122 @@ const colors = [
 ];
 ```
 
-**how might we add 1 to everything in this list**
+## How might we normally add1 to everything in the list?
 
 ```javascript
-const nums= []
+const nums = [1, 2, 3, 4, 5, 6];
+
+for (let i = 0; i<nums.length; i++) {
+    nums[i] = nums[i] + 1
+}
+
+// [2, 3, 4, 5, 6, 7]
 ```
+
+What if you think about this operation as you have something you want to do to every element of the list?
+
+Can you express the "operation" as a function?
+
+```javascript
+function add1(x) {
+    return x + 1;
+}
+
+const nums = [1, 2, 3, 4, 5, 6];
+
+// what function do you want to run on every element of this list?
+
+for (let i = 0; i<nums.length; i++) {
+    nums[i] = add1(nums[i]);
+}
+```
+
+Generalizing into the "map":
+
+```javascript
+function add1(x) {
+    return x + 1;
+}
+
+const nums = [1, 2, 3, 4, 5, 6];
+
+// what function do you want to run on every element of this list?
+
+function myMap(callable, arr) {
+    for (let i = 0; i<arr.length; i++) {
+        arr[i] = callable(arr[i]);
+    }
+}
+
+myMap(add1, nums)
+```
+
+We aren't going to actually implement this from scratch, the actual version of this "map" function is built into all kinds of modern programming languages.
+
+Here's an example of the add1 but directly built-in to JS with an arrow function in this case:
+
+```javascript
+// let nums = [3, 4, 5, 6, 7, 8];
+
+nums.map((x) => x + 1);
+// [4, 5, 6, 7, 8, 9]
+```
+
+### A couple quick notes on how does this work?
+
+Calling a function directly:
+
+```javascript
+function add1(x) {
+    return x + 1;
+}
+
+nums.map((x) => add1(x));
+```
+
+Having more complexity inside your arrow function:
+
+```javascript
+nums.map((x) => {
+    console.log(x);
+    return x + 1;
+});
+```
+
+### Example: What is the length of all strings?
+
+
+```javascript
+const words = ['the', 'quick', 'brown', 'fox'];
+
+// we want an array containing the length of each of these words
+
+words.map((word) => word.length);
+```
+
+## Filter
+
+Takes a predicate (a function which returns true/false) and "filters out" everything that returns true.
+
+Fun side note: The "Left Pad Incident of 2016": [https://en.wikipedia.org/wiki/Npm_left-pad_incident](https://en.wikipedia.org/wiki/Npm_left-pad_incident)
+
+Given:
+
+```javascript
+let nums = [3, 4, 5, 6, 7, 8];
+
+function isEven(x) {
+    return x % 2 === 0;
+}
+
+
+nums.filter((x) => isEven(x));
+```
+
+Equivalently with an arrow function:
+
+```javascript
+nums.filter((x) => x % 2 === 0);
+```
+
+## Reduce
