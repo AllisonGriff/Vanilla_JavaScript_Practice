@@ -6,7 +6,7 @@ function onSubmit(event) {
     // the prevent default is keeping the page from reloading. 
     event.preventDefault();
 
-    console.log(document.forms.petstore);
+    console.log(document.forms.petstore.pets.value);
     // your JS code goes here
 }
 

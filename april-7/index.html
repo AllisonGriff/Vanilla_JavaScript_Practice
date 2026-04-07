@@ -13,15 +13,24 @@
 
 <form action="" method="get" name = "petstore"> 
 
-    <label for="favAnimal">What is your favorite animal:</label>
-    <input type="text" name="favAnimal" id="favAnimal">
+    <fieldset>
+        <fieldset>
+    <legend>Pet Selection</legend>
+    <div>
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name">
+    </div>
+    <div>
+        <label for="pet-select">Choose a Pet:</label>
+        <select name="pets" id="pets">
+            <option value="dog">Dog</option>
+            <option value="cat" selected>Cat</option>
+            <option value="goldfish">Goldfish</option>
+        </select>
+    </div>
+</fieldset>
 
-    <label for="pet-select">Choose a pet:</label>
-<select name="pets" id="pets">
-  <option value="dog">Dog</option>
-  <option value="cat" selected>Cat</option>
-  <option value="goldfish">Goldfish</option>
-</select>
+
 
     <button type="submit">Submit</button>
 
