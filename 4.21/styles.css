@@ -1,0 +1,42 @@
+.container {
+    width: 80%;
+    margin: 100px auto 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+#pet-list {
+    background-color: aliceblue;
+    margin: 2.0rem 3.0rem;
+    padding: 1.0rem 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h2 {
+    margin-bottom: 0;
+}
+p {
+    margin: 1.0rem 0;
+    font-size: 36px;
+}
+li { padding-bottom: 0.5rem; }
+button {
+    background-color: lightblue;
+    color: black;
+    padding: 0.5rem 1.0rem;
+    border: none;
+    border-radius: 8px;
+    margin: 0.5rem 0.25rem;
+}
+button:hover {
+    background-color: blue;
+    color: white;
+}
+input {
+    text-align: center;
+    margin: 0.5rem;
+}
+.actions button {
+    font-size: x-large;
+}
