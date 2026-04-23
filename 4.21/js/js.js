@@ -9,34 +9,50 @@ function getPet(event) {
     let html = `<li>${petname} (${petType}, Rank: ${petRank})</li>`;
 
     console.log(event.target.dataset)
-    // document.querySelector or event.target?
-    // 
-    // add an item in the UL
-        // li text content
-            // event.target.dataet
-        
-    // hoow do we update the list item
-    // insertAdjacentHTML(beforeend) or appendChild?
+
+    document.querySelector('#pet-list').insertAdjacentHTML('beforeend', html);
+   
 }
 
+
+// TODO: add event listeners to the pet buttons
 document.querySelectorAll('#pet-buttons button').forEach((button) => {
     button.addEventListener('click', getPet);
 });
 
 
 // saves #pet-list into local storage
-function savePetList() {}
+function savePetList() {
+        let petList = document.querySelector('#pet-list').innerHTML;
+        localStorage.setItem('petList', petList);
+
+        // localStorage.setItem('petList', document.querySelector("ul").innerHTML);
+        // alert('Pet list saved!');
+}
 
 // loads a saved list from local storage
-function loadPetList() {}
+function loadPetList() {
+    let savedList = localStorage.getItem('petList');
+    if (savedList) {
+        document.querySelector('#pet-list').innerHTML = savedList;
+    }
+}
 
 // clears #pet-list (interface)
-function clearPetList() {}
+function clearPetList() {
+    document.querySelector('#pet-list').innerHTML = '';
+}
 
 // deletes the saved list from local storage
-function deletePetList() {}
+function deletePetList() {
+    localStorage.removeItem('petList');
+}
 
 document.querySelector('#save').addEventListener('click', savePetList);
 document.querySelector('#load').addEventListener('click', loadPetList);
 document.querySelector('#clear').addEventListener('click', clearPetList);
 document.querySelector('#delete').addEventListener('click', deletePetList);
+
+
+// edge cases if there is no data to load
+// JSON as an interchange format for more complex data (objects, arrays, etc.) instead of just strings
