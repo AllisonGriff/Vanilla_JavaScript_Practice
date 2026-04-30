@@ -15,7 +15,7 @@ function getPet(event) {
 }
 
 
-// TODO: add event listeners to the pet buttons
+
 document.querySelectorAll('#pet-buttons button').forEach((button) => {
     button.addEventListener('click', getPet);
 });
